@@ -127,6 +127,10 @@ input {
     text-align: center;
 }
 
+.breadcrumb__subtitle span {
+    color: var(--first-color);
+}
+
 /*=============== LAYOUT ===============*/
 .container {
     max-width: 968px;
@@ -559,10 +563,152 @@ input {
 }
 
 /*=============== SHOP PAGE ===============*/
+.shop__container {
+    grid-template-columns: 1.7fr 3.3fr;
+    column-gap: 1.8rem;
+}
 
+.sidebar {
+    padding: 1.8rem;
+    background-color: var(--container-color);
+    border-radius: 1rem;
+}
+
+.filter__title {
+    font-size: var(--h3-font-size);
+    text-transform: uppercase;
+}
+
+.filter__subtitle {
+    margin: 1.25rem 0 var(--mb-0-5);
+    font-size: var(--normal-font-size);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--mb-0-5);
+    color: var(--text-color);
+    font-size: var(--small-font-size);
+}
+
+.filter p {
+    flex: 1;
+}
+
+.filter input {
+    margin-right: var(--mb-0-75);
+    cursor: pointer;
+}
+
+.shop__items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+}
+
+.shop__content {
+    position: relative;
+    background-color: var(--container-color);
+    padding: 2rem 0;
+    border-radius: 1rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.shop__img {
+    width: 150px;
+    margin-bottom: var(--mb-1);
+    transition: .3s;
+}
+
+.shop__tag {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    background-color: var(--first-color);
+    color: #fff;
+    font-size: var(--small-font-size);
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+}
+
+.shop__title {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+}
+
+.shop__subtitle {
+    display: flex;
+    font-size: var(--small-font-size);
+    margin-bottom: var(--mb-1);
+}
+
+.shop__prices {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.shop__price {
+    font-weight: var(--font-medium);
+    color: var(--title-color);
+}
+
+.shop__discounts {
+    color: var(--first-color);
+    font-size: var(--smaller-font-size);
+    text-decoration: line-through;
+    font-weight: var(--font-medium);
+}
+
+.shop__button {
+    display: inline-flex;
+    padding: .5rem;
+    border-radius: .25rem .25rem .75rem .25rem;
+    position: absolute;
+    bottom: 0;
+    right: -3rem;
+}
+
+.shop__icon {
+    font-size: 1.25rem;
+}
+
+.shop__content:hover .shop__img {
+    transform: translateY(-.5rem);
+}
+
+.shop__content:hover .shop__button {
+    right: 0;
+}
 
 /*=============== PAGINATION ===============*/
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    column-gap: .8rem;
+    margin-top: var(--mb-2-5);
+    font-size: var(--normal-font-size);
+}
 
+.pagination span {
+    width: 2.2rem;
+    height: 2.2rem;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pagination .current {
+    background-color: var(--first-color);
+    color: #fff;
+}
+
+.pagination__icon {
+    font-size: var(--h2-font-size);
+}
 
 /*=============== DETAILS PAGE ===============*/
 
@@ -571,16 +717,117 @@ input {
 
 
 /*=============== BLOG PAGE ===============*/
+.blog__container {
+    row-gap: 1.8rem;
+}
 
+.blog__post {
+    grid-template-columns: .8fr 1.2fr;
+    column-gap: 2rem;
+    align-items: center;
+    background-color: var(--container-color);
+    border-radius: 1.2rem;
+    padding: 1.4rem;
+}
+
+.blog__img {
+    border-radius: .8rem;
+}
+
+.blog__details {
+    font-size: var(--small-font-size);
+    text-align: justify;
+    margin-bottom: var(--mb-1);
+}
+
+.blog__title {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--mb-0-5);
+}
+
+.blog__date {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color);
+    margin-bottom: var(--mb-0-75);
+}
+
+.read__more {
+    text-align: right;
+}
 
 /*=============== CART PAGE ===============*/
 
 
 /*=============== FAQ PAGE ===============*/
+.questions__container {
+    grid-template-columns: repeat(2,1fr);
+    gap: 1.5rem;
+    align-items: flex-start;
+}
 
+.questions__group {
+    display: grid;
+    row-gap: 2rem;
+}
+
+.questions__item {
+    background-color: var(--container-color);
+    border-radius: .25rem;
+}
+
+.questions__item-title {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+}
+
+.questions__icon {
+    font-size: 1.25rem;
+    color: var(--title-color);
+}
+
+.questions__description {
+    font-size: var(--smaller-font-size);
+    padding: 0 3.5rem 2.25rem 2.75rem;
+}
+
+.questions__header {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.questions__content {
+    overflow: hidden;
+    height: 0;
+}
+
+.questions__item,
+.questions__header,
+.questions__item-title,
+.questions__icon,
+.questions__description,
+.questions__content {
+    transition: .3s;
+}
 
 /*Rotate icon, change color of titles and background*/
+.accordion-open .questions__header,
+.accordion-open .questions__content {
+    background-color: var(--first-color);
+}
 
+.accordion-open .questions__item-title,
+.accordion-open .questions__description,
+.accordion-open .questions__icon {
+    color: #fff;
+}
+
+.accordion-open .questions__icon {
+    transform: rotate(45deg);
+}
 
 /*=============== REGISTRATION PAGE ===============*/
 
@@ -987,6 +1234,48 @@ input {
         grid-template-columns: repeat(2, 1fr);
         row-gap: 2rem;
     }
+
+    .shop__container {
+        grid-template-columns: 1.6fr 3.4fr;
+    }
+
+    .shop__content {
+        padding: 2rem 0 1.5rem 0;
+        border-radius: .75rem;
+    }
+
+    .shop__img {
+        width: 120px;
+    }
+
+    .shop__img,
+    .shop__subtitle {
+        margin-bottom: var(--mb-0-5);
+    }
+
+    .shop__title {
+        font-size: var(--normal-font-size);
+    }
+
+    .blog__post {
+        column-gap: 1.6rem;
+    }
+
+    .blog__title {
+        font-size: var(--normal-font-size);
+    }
+
+    .questions__group {
+        row-gap: 1.5rem;
+    }
+
+    .questions__header {
+        padding: .75rem .5rem;
+    }
+
+    .questions__description {
+        padding: 0 1.25rem 1.25rem 2.5rem;
+    }
 }
 
 /* For medium devices */
@@ -1070,6 +1359,24 @@ input {
         grid-template-columns: .7fr;
     }
 
+    .shop__container {
+        grid-template-columns: 520px;
+        row-gap: 2rem;
+        justify-content: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+
+    .blog__post {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .questions__container {
+        grid-template-columns: 1fr;
+    }
+
     .footer__container {
         grid-template-columns: 1fr;
         row-gap: 2rem;
@@ -1097,6 +1404,33 @@ input {
     .login,
     .cart {
         width: 100%;
+    }
+
+    .shop__container {
+        grid-template-columns: .8fr;
+    }
+
+    .shop__items {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        padding: 1.25rem 1.4rem;
+    }
+
+    .pagination span {
+        height: 1.8rem;
+        width: 1.8rem;
+        line-height: 30px;
+    }
+
+    .pagination {
+        column-gap: .4rem;
+    }
+
+    .blog__post {
+        grid-template-columns: 1fr;
+        row-gap: .8rem;
     }
 }
 
@@ -1127,5 +1461,17 @@ input {
 
     .steps__card {
         padding: 1.5rem;
+    }
+
+    .shop__container {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination span {
+        font-size: var(--small-font-size);
+    }
+
+    .blog__post {
+        padding: .8rem;
     }
 }
