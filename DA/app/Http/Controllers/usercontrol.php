@@ -21,7 +21,4 @@ class usercontrol extends Controller
     public function faq_page(){
         return view('user.faq');
     }
-    public function contact_page(){
-        return view('user.contact');
-    }
 }

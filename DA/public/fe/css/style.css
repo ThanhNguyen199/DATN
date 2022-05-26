@@ -1,6 +1,6 @@
 /*=============== GOOGLE FONTS ===============*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;900&display=swap');
 /*=============== VARIABLES CSS ===============*/
 :root {
     --header-height: 3.5rem;
@@ -15,7 +15,7 @@
     --scroll-thumb-color: hsl(250, 12%, 80%);
 
     /*========== Font and typography ==========*/
-    --body-font: 'Poppins', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
     --biggest-font-size: 4rem;
     --h1-font-size: 2.25rem;
     --h2-font-size: 1.5rem;
@@ -102,8 +102,9 @@ button {
 
 button,
 input {
-    border: none;
+    /* border: none; */
     outline: none;
+    border-radius: 0 0.5rem;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
@@ -204,7 +205,6 @@ input {
 
 .nav__link{
     color: var(--title-color);
-    font-weight: var(--font-medium);
     font-size: var(--normal-font-size);
     transition: .3s;
 }
@@ -391,7 +391,7 @@ input {
 }
 
 .discount__img {
-    width: 200px;
+    width: 300px;
 }
 
 .discount__data {

@@ -30,27 +30,19 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="{{URL::to('/')}}" class="nav__link">Home</a>
+                        <a href="{{URL::to('/')}}" class="nav__link">Trang chủ</a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="{{URL::to('/shop')}}" class="nav__link">Shop</a>
+                        <a href="{{URL::to('/shop')}}" class="nav__link">Sản phẩm</a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="{{URL::to('/about')}}" class="nav__link">About</a>
+                        <a href="{{URL::to('/about')}}" class="nav__link">Cửa hàng</a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="{{URL::to('/blog')}}" class="nav__link">Blog</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="{{URL::to('/faq')}}" class="nav__link">Faq's</a>
-                    </li>
-
-                    <li class="nav__item">
-                        <a href="{{URL::to('/contact')}}" class="nav__link">Contact</a>
+                        <a href="{{URL::to('/blog')}}" class="nav__link">Tin tức</a>
                     </li>
                 </ul>
 
@@ -79,7 +71,7 @@
     <div class="cart" id="cart">
         <i class="bx bx-x cart__close" id="cart-close"></i>
 
-        <h2 class="cart__title-center">My Cart</h2>
+        <h2 class="cart__title-center">Giỏ hàng</h2>
 
         <div class="cart__container">
             <!-- <article class="cart__card">
@@ -165,8 +157,8 @@
         </div>
 
         <div class="cart__prices">
-            <span class="cart__prices-item">0 item</span>
-            <span class="cart__prices-total">$0</span>
+            <span class="cart__prices-item">0 sản phẩm</span>
+            <span class="cart__prices-total">0 vnd</span>
         </div>
     </div>
 
@@ -174,25 +166,25 @@
     <div class="login" id="login">
         <i class="bx bx-x login__close" id="login-close"></i>
 
-        <h2 class="login__title-center">Login</h2>
+        <h2 class="login__title-center">Đăng nhập</h2>
 
         <form action="" class="login__form grid">
             <div class="login__content">
-                <label for="" class="login__label">Email</label>
-                <input type="email" class="login__input">
+                <label for="" class="login__label">Tài khoản</label>
+                <input type="Tài khoản" class="login__input">
             </div>
 
             <div class="login__content">
-                <label for="" class="login__label">Password</label>
-                <input type="password" class="login__input">
+                <label for="" class="login__label">Mật khẩu</label>
+                <input type="Mật khẩu" class="login__input">
             </div>
 
             <div>
-                <a href="#" class="button">Sign in</a>
+                <a href="#" class="button">Đăng nhập</a>
             </div>
 
             <div>
-                <p class="signup">Not a member? <a href="registration.html">Sign up now</a></p>
+                <p class="signup">Chưa là thành viên? <a href="registration.html">Đăng ký ngay</a></p>
             </div>
         </form>
     </div>
@@ -221,32 +213,31 @@
             </div>
             <!-- FOOTER CONTENT 2 -->
             <div class="footer__content">
-                <h3 class="footer__title">About</h3>
+                <h3 class="footer__title">Cửa hàng</h3>
 
                 <ul class="footer__links">
-                    <li><a href="" class="footer__link"> About Us</a></li>
-                    <li><a href="" class="footer__link"> Customer Support</a></li>
-                    <li><a href="" class="footer__link"> Support Center</a></li>
+                    <li><a href="" class="footer__link"> Hỗ trợ khách hàng</a></li>
+                    <li><a href="" class="footer__link"> Trung tâm hỗ trợ</a></li>
                 </ul>
             </div>
             <!-- FOOTER CONTENT 3 -->
             <div class="footer__content">
-                <h3 class="footer__title">Our Services</h3>
+                <h3 class="footer__title">Chính sách</h3>
 
                 <ul class="footer__links">
-                    <li><a href="" class="footer__link"> Shop</a></li>
-                    <li><a href="" class="footer__link"> Discounts</a></li>
-                    <li><a href="" class="footer__link"> Shipping Model</a></li>
+                    <li><a href="{{URL::to('/faq')}}" class="footer__link"> Chính sách bán hàng</a></li>
+                    <li><a href="" class="footer__link"> Chính sách bảo mật thông tin</a></li>
+                    <li><a href="" class="footer__link"> Chính sách giải quyết và khiếu nại</a></li>
                 </ul>
             </div>
             <!-- FOOTER CONTENT 4 -->
             <div class="footer__content">
-                <h3 class="footer__title">Our Company</h3>
+                <h3 class="footer__title">Công ty</h3>
 
                 <ul class="footer__links">
-                    <li><a href="" class="footer__link"> Register</a></li>
-                    <li><a href="" class="footer__link"> Contact Us</a></li>
-                    <li><a href="" class="footer__link"> About Us</a></li>
+                    <li><a href="" class="footer__link"> Giới thiệu</a></li>
+                    <li><a href="" class="footer__link"> Hệ thống cửa hàng</a></li>
+                    <li><a href="" class="footer__link"> Liên hệ</a></li>
                 </ul>
             </div>
         </div>

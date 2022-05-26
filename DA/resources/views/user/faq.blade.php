@@ -2,8 +2,8 @@
 @section('content')
 <!--=============== FAQ'S ===============-->
 <section class="questions section container">
-    <h2 class="breadcrumb__title">FAQ's Page</h2>
-    <h3 class="breadcrumb__subtitle">Home > <span>FAQ'S</span></h3>
+    <h2 class="breadcrumb__title">Chính sách và hỗ trợ</h2>
+    <h3 class="breadcrumb__subtitle">Chính sách bán hàng</h3>
 
     <div class="questions__container grid">
         <div class="questions__group">

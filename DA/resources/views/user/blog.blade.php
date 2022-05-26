@@ -2,8 +2,8 @@
 @section('content')
 <!--=============== BLOG ===============-->
 <section class="blog section container">
-    <h2 class="breadcrumb__title">Blog Page</h2>
-    <h3 class="breadcrumb__subtitle">Home > <span>Blog</span></h3>
+    <h2 class="breadcrumb__title">Tin tức</h2>
+    <h3 class="breadcrumb__subtitle">Trang chủ > <span>Tin tức</span></h3>
 
     <div class="blog__container grid">
         <div class="blog__post grid">

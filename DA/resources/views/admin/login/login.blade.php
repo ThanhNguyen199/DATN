@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <!--========== Material Icons ==========-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="{{asset('public/be/css/login.css')}}">   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!--========== Material Icons ==========-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{asset('public/be/css/login.css')}}">
 </head>
+
 <body>
     <div class="form">
-      <div class="text-center">
-        <label for="reg-log"></label>
-        <div class="card-3d-wrap">
-          <div class="card-3d-wrapper">
-            <!-- card front -->
-            <div class="card-front">
-              <div class="center-wrap">
-                <h4 class="heading">Log In</h4>
-                <div class="form-group">
-                  <input type="text" class="form-style" placeholder="Username">
-                  <i class="input-icon material-icons">alternate_email</i>
+        <div class="text-center">
+            <label for="reg-log"></label>
+            <div class="card-3d-wrap">
+                <div class="card-3d-wrapper">
+                    <!-- card front -->
+                    <div class="card-front">
+                        <div class="center-wrap">
+                            <h4 class="heading">Đăng nhập</h4>
+                            <form class="login" method="POST" action="{{ URL::to(route('admin_login')) }}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <input type="text" name="username" class="form-style" placeholder="Tài khoản">
+                                    <i class="input-icon material-icons">perm_identity</i>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-style" placeholder="Mật khẩu">
+                                    <i class="input-icon material-icons">lock</i>
+                                </div>
+                                <button class="btn">Đăng nhập</button>
+                            </form>
+                            <p class="text-center"><a href="{{URL::to('/admin/forgot-password')}}" class="link">Quên mật khẩu</a></p>
+                            @if (session('message'))
+                            <p>{{session('message')}}</p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="form-style" placeholder="Password">
-                  <i class="input-icon material-icons">lock</i>
-                </div>
-                <a href="#" class="btn">Login</a>
-                <p class="text-center"><a href="{{URL::to('/forgot-password')}}" class="link">Forgot your password</a></p>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 </body>
+
 </html>

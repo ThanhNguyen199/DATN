@@ -3,83 +3,57 @@
 <!--=============== SHOP ===============-->
 <section class="shop section container">
     <h2 class="breadcrumb__title">Shop Page</h2>
-    <h3 class="breadcrumb__subtitle">Home > <span>Shop</span></h3>
+    <h3 class="breadcrumb__subtitle">Trang chủ > <span>Sản phẩm</span></h3>
 
     <div class="shop__container grid">
         <div class="sidebar">
-            <h3 class="filter__title">Select Filters</h3>
             <!-- FILTER 1 -->
             <div class="filter__content">
-                <h3 class="filter__subtitle">Conditon</h3>
+                <h3 class="filter__subtitle">Danh mục sản phẩm</h3>
 
                 <div class="filter">
                     <input type="checkbox" name="" id="">
-                    <p>New</p> <span>(13)</span>
+                    <p>Xe đạp đường phố</p> <span>(13)</span>
                 </div>
                 <div class="filter">
                     <input type="checkbox" name="" id="">
-                    <p>Sale</p> <span>(13)</span>
+                    <p>Xe đạp địa hình</p> <span>(13)</span>
+                </div>
+                <div class="filter">
+                    <input type="checkbox" name="" id="">
+                    <p>Xe đạp nữ</p> <span>(13)</span>
+                </div>
+                <div class="filter">
+                    <input type="checkbox" name="" id="">
+                    <p>Xe đạp trẻ em</p> <span>(13)</span>
+                </div>
+                <div class="filter">
+                    <input type="checkbox" name="" id="">
+                    <p>Phụ kiện cho xe đạp</p> <span>(13)</span>
+                </div>
+                <div class="filter">
+                    <input type="checkbox" name="" id="">
+                    <p>Phụ kiện cho người đạp xe</p> <span>(13)</span>
                 </div>
             </div>
             <!-- FILTER 2 -->
             <div class="filter__content">
-                <h3 class="filter__subtitle">Size</h3>
+                <h3 class="filter__subtitle">Thương hiệu</h3>
 
                 <div class="filter">
                     <input type="checkbox" name="" id="">
-                    <p>S</p> <span>(13)</span>
+                    <p>giant</p> <span>(13)</span>
                 </div>
                 <div class="filter">
                     <input type="checkbox" name="" id="">
-                    <p>M</p> <span>(13)</span>
+                    <p>Trix</p> <span>(13)</span>
                 </div>
                 <div class="filter">
                     <input type="checkbox" name="" id="">
-                    <p>L</p> <span>(13)</span>
+                    <p>Momentum</p> <span>(13)</span>
                 </div>
             </div>
-            <!-- FILTER 3 -->
-            <div class="filter__content">
-                <h3 class="filter__subtitle">Categories</h3>
-
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Men</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Women</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Kids</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Others</p> <span>(13)</span>
-                </div>
-            </div>
-            <!-- FILTER 4 -->
-            <div class="filter__content">
-                <h3 class="filter__subtitle">Styles</h3>
-
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Casual</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Dressy</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Girly</p> <span>(13)</span>
-                </div>
-                <div class="filter">
-                    <input type="checkbox" name="" id="">
-                    <p>Others</p> <span>(13)</span>
-                </div>
-            </div>
+            
         </div>
 
         <div class="shop__items grid">
