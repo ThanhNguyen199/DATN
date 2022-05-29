@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -56,11 +56,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Danh mục
+                                Danh mục sản phẩm
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -72,7 +72,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.category.create')) }}" class="nav-link">
+                                <a href="{{ URL::to(route('admin.category.create')) }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Thêm danh mục</p>
                                 </a>
@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -191,13 +191,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Thêm danh mục</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Danh mục sản phẩm</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -208,7 +208,9 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- jquery validation -->
                         <div class="card">
                             @if (session('message'))
                                 <div class="card-header">
@@ -216,45 +218,38 @@
                                 </div>
                         @endif
                         <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
-                                        <th>Thời gian tạo</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($brands as $key => $brand)
-                                        <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
-                                            @endif
-                                            <td>{{ $brand->created_at }}</td>
-                                            <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                            <!-- form start -->
+                            <form id="quickForm" action="{{ URL::to(route('admin.category.store')) }}" method="POST">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" class="required">Tên danh mục</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-address-card"></i></span>
+                                            </div>
+                                            <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                                   placeholder="Nhập vào tên danh mục">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer text-center">
+                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!-- /.col -->
+                    <!--/.col (left) -->
+                    <!-- right column -->
+                    <div class="col-md-6">
+                    </div>
+                    <!--/.col (right) -->
                 </div>
                 <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

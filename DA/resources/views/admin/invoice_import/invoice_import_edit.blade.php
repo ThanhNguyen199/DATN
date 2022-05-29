@@ -2,6 +2,7 @@
 @section('admin_content')
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
@@ -10,11 +11,12 @@
                     <a class="d-block">{{ auth()->user()->name }}</a>
                 </div>
             </div>
+
             <!-- SidebarSearch Form -->
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm"
-                           aria-label="Search">
+                        aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-sidebar">
                             <i class="fas fa-search fa-fw"></i>
@@ -22,10 +24,10 @@
                     </div>
                 </div>
             </div>
+
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
                         <a href="{{ URL::to(route('screen_admin_home')) }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -33,8 +35,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +45,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -60,7 +62,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Danh mục
+                                Danh mục sản phẩm
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -81,7 +83,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -103,8 +105,8 @@
                         </ul>
                     </li>
                     <li class="nav-header">Hóa đơn</li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-file-download"></i>
                             <p>
                                 Hóa đơn nhập
@@ -119,7 +121,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.invoice_import.create')) }}" class="nav-link">
+                                <a href="{{ URL::to(route('admin.invoice_import.create')) }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Nhập hàng</p>
                                 </a>
@@ -163,7 +165,7 @@
                             <p>Thống kê khách hàng</p>
                         </a>
                     </li>
-                    @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
+                    @if (auth()->user()->role->name === Config::get('auth.roles.manager'))
                         <li class="nav-header">Tài khoản</li>
                         <li class="nav-item">
                             <a href="{{ URL::to(route('admin.account.index')) }}" class="nav-link">
@@ -184,6 +186,7 @@
         </div>
         <!-- /.sidebar -->
     </aside>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -191,7 +194,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Thêm thương hiệu</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -204,57 +207,145 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <!-- Main content -->
+
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            @if (session('message'))
-                                <div class="card-header">
-                                    <p class="noti">{{ session('message') }}</p>
-                                </div>
-                        @endif
-                        <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
-                                        <th>Thời gian tạo</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($brands as $key => $brand)
-                                        <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
-                                            @endif
-                                            <td>{{ $brand->created_at }}</td>
-                                            <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+                    @if (session('message'))
+                    <div class="card-header">
+                        <p class="noti">{{ session('message') }}</p>
                     </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+                    @endif
+                        <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- Table row -->
+                            <div class="row">
+                                <!-- accepted payments column -->
+                                <div class="col-6">
+                                    <form id="quickForm"
+                                        action="{{ URL::to(route('admin.invoice_import.update', ['invoice_import' => $invoiceImport->id])) }}"
+                                        method="POST">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="PUT">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Chọn sản phẩm</label>
+                                                <div class="input-group">
+                                                    <select class="select2bs4" name="product">
+                                                        <option selected="selected" disabled>Chọn 1 sản phẩm</option>
+                                                        @foreach ($products as $product)
+                                                            <option value="{{ $product->id }}">{{ $product->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Số lượng</label>
+                                                <div class="input-group">
+                                                    <input type="number" name="quantity" class="form-control"
+                                                        placeholder="Nhập vào số lượng">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Giá</label>
+                                                <div class="input-group">
+                                                    <input type="number" name="price" class="form-control"
+                                                        placeholder="Nhập vào giá">
+                                                </div>
+                                            </div>
+
+                                            <!-- /.card-body -->
+                                            <div class="card-footer text-center">
+                                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-6">
+                                    <p class="lead">Thông tin hóa đơn</p>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">Tổng tiền</th>
+                                                <td> {{ Lang::get('message.before_unit_money') . number_format($invoiceImport->into_money, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Trạng thái:</th>
+
+                                                <td>
+                                                    @if ($invoiceImport->status)
+                                                        <span class="badge bg-success">Đã thanh toán</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Chưa thanh toán</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($invoiceImport->detailInvoiceImport->sortByDesc('created_at') as $key => $detailInvoiceImport)
+                                                <tr>
+                                                    <td> {{ $detailInvoiceImport->product->name }}</td>
+                                                    <td> {{ number_format($detailInvoiceImport->quantity, 0, ',', '.') }}
+                                                    </td>
+                                                    <td> {{ Lang::get('message.before_unit_money') . number_format($detailInvoiceImport->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                                    </td>
+                                                    <td> {{ Lang::get('message.before_unit_money') . number_format($detailInvoiceImport->into_money, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ URL::to(route('admin.invoice_import.destroy', ['invoice_import'=>$detailInvoiceImport->id])) }}" method="POST">
+                                                            @csrf
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <button class="btn-ico" type="submit"><i class="text-danger fas fa-minus-circle"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <a href="{{URL::to(route('admin.invoice_import.pay', ['invoice_import'=>$invoiceImport->id]))}}" class="btn btn-success float-right">
+                                        <i class="far fa-credit-card"></i>
+                                        Thanh toán
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

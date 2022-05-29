@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -79,9 +79,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -89,7 +89,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.product.index')) }}" class="nav-link">
+                                <a href="{{ URL::to(route('admin.product.index')) }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách sản phẩm</p>
                                 </a>
@@ -101,6 +101,42 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-header">Hóa đơn</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-download"></i>
+                            <p>
+                                Hóa đơn nhập
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ URL::to(route('admin.invoice_import.index')) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh sách hóa đơn</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ URL::to(route('admin.invoice_import.create')) }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nhập hàng</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ URL::to(route('admin.invoice_export.order')) }}" class="nav-link">
+                            <i class="nav-icon fas fa-paste"></i>
+                            <p>Đơn đặt hàng</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ URL::to(route('admin.invoice_export.invoice')) }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-export"></i>
+                            <p>Hóa đơn bán</p>
+                        </a>
                     </li>
                     <li class="nav-header">Hóa đơn</li>
                     <li class="nav-item">
@@ -191,13 +227,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Sửa sản phẩm</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Sản phẩm</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -208,7 +244,9 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- jquery validation -->
                         <div class="card">
                             @if (session('message'))
                                 <div class="card-header">
@@ -216,45 +254,119 @@
                                 </div>
                         @endif
                         <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
-                                        <th>Thời gian tạo</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($brands as $key => $brand)
-                                        <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
+                            <!-- form start -->
+                            <form id="quickForm"
+                                  action="{{ URL::to(route('admin.product.update', ['product'=>$product->id])) }}"
+                                  enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <input name="_method" type="hidden" value="PUT">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="required">Tên sản phẩm</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-address-card"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" name="name" class="form-control"
+                                                   placeholder="Nhập vào tên sản phẩm" value="{{ $product->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Thương hiệu</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-th"></i></span>
+                                            </div>
+                                            <select class="form-control select2bs4" name="brand">
+                                                <option selected="selected" disabled>Chọn 1 thương hiệu</option>
+                                                @foreach ($brands as $brand)
+                                                    <option value="{{ $brand->id }}"
+                                                            @if($brand->id == $product->brand_id) selected @endif>
+                                                        {{ $brand->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Danh mục</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-th"></i></span>
+                                            </div>
+                                            <select class="form-control select2bs4" name="category">
+                                                <option selected="selected" disabled>Chọn 1 danh mục</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                            @if($category->id == $product->category_id) selected @endif>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="required">Giá</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                            </div>
+                                            <input type="number" name="price" class="form-control"
+                                                   placeholder="Nhập vào giá" value="{{$product->price}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
+                                            </div>
+                                            <textarea class="form-control" name="short_description" rows="2"
+                                                      placeholder="Nhập vào mô tả">{{$product->short_description}}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hình ảnh</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-image"></i></span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" name="image" accept="image/*"
+                                                           class="custom-file-input" id="customFile">
+                                                    <label class="custom-file-label" for="customFile">Chọn 1 hình
+                                                        ảnh</label>
+                                                </div>
+                                            </div>
+                                            @if($product->image)
+                                                <img class="img-ctr" src="{{asset (''.$product->image) }}"/>
                                             @endif
-                                            <td>{{ $brand->created_at }}</td>
-                                            <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group row pt-3">
+                                            <div class="col-md-6">
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" name="active" class="custom-control-input"
+                                                           id="customSwitch1" @if ($product->active) checked @endif>
+                                                    <label class="custom-control-label" for="customSwitch1">Hoạt
+                                                        động</label>
+                                                </div>
+                                            </div>
+                                            <div class="text-right col-md-6">
+                                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!-- /.col -->
+                    <!--/.col (left) -->
                 </div>
                 <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

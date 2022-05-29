@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -166,7 +166,7 @@
                     @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
                         <li class="nav-header">Tài khoản</li>
                         <li class="nav-item">
-                            <a href="{{ URL::to(route('admin.account.index')) }}" class="nav-link">
+                            <a href="{{ URL::to(route('admin.account.index')) }}" class="nav-link active">
                                 <i class="nav-icon fas fa-address-book"></i>
                                 <p>Danh sách tài khoản</p>
                             </a>
@@ -191,13 +191,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Danh sách admin</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Tài khoản</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -220,26 +220,31 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th>Tài khoản</th>
+                                        <th>Số điện thoại</th>
                                         <th>Thời gian tạo</th>
                                         <th>Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($brands as $key => $brand)
+                                    @foreach ($admins as $key => $admin)
                                         <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
-                                            @endif
-                                            <td>{{ $brand->created_at }}</td>
+                                            <td>{{ $admin->name }}</td>
+                                            <td>{{ $admin->email }}</td>
+                                            <td>{{ $admin->username }}</td>
+                                            <td>{{ $admin->phone }}</td>
+                                            <td>{{ $admin->created_at }}</td>
                                             <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
+                                                <form
+                                                    action="{{ URL::to(route('admin.account.destroy', ['account'=>$admin->id])) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button class="btn-ico" type="submit"><i
+                                                            class="text-danger fas fa-trash-alt ico"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

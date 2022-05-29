@@ -1,8 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\usercontrol;
-use App\Http\Controllers\admincontrol;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceImportController;
+use App\Http\Controllers\InvoiceExportController;
+use App\Http\Controllers\StatisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,29 +21,21 @@ use App\Http\Controllers\admincontrol;
 |
 */
 
-//User
-Route::get('/', [usercontrol::class, 'home_page']);
-Route::get('/shop', [usercontrol::class, 'shop_page']);
-Route::get('/about', [usercontrol::class, 'about_page']);
-Route::get('/blog', [usercontrol::class, 'blog_page']);
-Route::get('/faq', [usercontrol::class, 'faq_page']);
-
 //Admin
 Route::prefix('admin')->group(function () {
 
-    Route::get('/login',                    [admincontrol::class, 'ScreenAdminLogin'])                  ->name('screen_admin_login');
-    Route::post('/login',                   [admincontrol::class, 'AdminLogin'])                        ->name('admin_login');
+    Route::get('/login',                                    [AuthController::class, 'initScreenLoginAdmin'])            ->name('screen_admin_login');
+    Route::post('/login',                                   [AuthController::class, 'loginAdmin'])                      ->name('admin_login');
+    
+    Route::get('/forgot-password',                          [AuthController::class, 'initScreenForgotPasswordAdmin'])   ->name('screen_admin_forgot_password');
+    Route::post('/forgot-password',                         [AuthController::class, 'forgotPasswordAmin'])              ->name('admin_forgot_password');
+    Route::get('/reset-password',                           [AuthController::class, 'initScreenUpdatePasswordAdmin'])   ->name('screen_admin_reset_password');
+    Route::post('/update-password',                         [AuthController::class, 'updatePasswordAdmin'])             ->name('admin_update_password');
 
-    Route::get('/forgot-password',          [admincontrol::class, 'screen_admin_forgot_password'])      ->name('screen_admin_forgot_password');
-    Route::post('/forgot-password',         [admincontrol::class, 'admin_forgot_password'])             ->name('admin_forgot_password');
-
-    Route::get('/reset-password',           [admincontrol::class, 'screen_admin_update_password'])      ->name('screen_admin_reset_password');;
-    Route::get('/update-password',          [admincontrol::class, 'admin_update_password'])             ->name('admin_update_password');
-
-    // Admin Authenticate
+    //Admin Authenticate
     Route::group(['middleware' => 'auth:sanctum'], function () {
-        Route::get('/dashboard',                            [admincontrol::class, 'dashboard'])                      ->name('screen_admin_home');
-        Route::get('/logout',                               [admincontrol::class, 'logoutAdmin'])                     ->name('admin_logout');
+        Route::get('/home',                                 [AuthController::class, 'indexAdmin'])                      ->name('screen_admin_home');
+        Route::get('/logout',                               [AuthController::class, 'logoutAdmin'])                     ->name('admin_logout');
 
         //Admin invoice import
         Route::get('invoice-import/pay/{invoice_import}',   [InvoiceImportController::class, 'pay'])                    ->name('admin.invoice_import.pay');
@@ -67,4 +65,21 @@ Route::prefix('admin')->group(function () {
         //Admin account
         Route::resource('account',                          AdminController::class,                                     ['names' => 'admin.account']);
     });
+});
+
+//User
+Route::get('/register',                                     [AuthController::class, 'initScreenRegister'])              ->name('screen_register');
+Route::post('/register',                                    [AuthController::class, 'register'])                        ->name('register');
+Route::get('/login',                                        [AuthController::class, 'initScreenLogin'])                 ->name('screen_login');
+Route::post('/login',                                       [AuthController::class, 'login'])                           ->name('login');
+Route::get('/',                                             [AuthController::class, 'index'])                           ->name('screen_home');
+
+Route::get('/forgot-password',                              [AuthController::class, 'initScreenForgotPassword'])        ->name('screen_forgot_password');
+Route::post('/forgot-password',                             [AuthController::class, 'forgotPassword'])                  ->name('forgot_password');
+Route::get('/reset-password',                               [AuthController::class, 'initScreenUpdatePassword'])        ->name('screen_reset_password');
+Route::post('/update-password',                             [AuthController::class, 'updatePassword'])                  ->name('update_password');
+
+//User Authenticate
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/logout',                                   [AuthController::class, 'logout'])                           ->name('logout');
 });

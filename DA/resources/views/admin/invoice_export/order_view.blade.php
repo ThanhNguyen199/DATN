@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -60,7 +60,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Danh mục
+                                Danh mục sản phẩm
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -127,7 +127,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to(route('admin.invoice_export.order')) }}" class="nav-link">
+                        <a href="{{ URL::to(route('admin.invoice_export.order')) }}" class="nav-link active">
                             <i class="nav-icon fas fa-paste"></i>
                             <p>Đơn đặt hàng</p>
                         </a>
@@ -191,70 +191,124 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Thông tin đơn đặt hàng {{$order->code_invoice}}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Hóa đơn</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            @if (session('message'))
-                                <div class="card-header">
-                                    <p class="noti">{{ session('message') }}</p>
-                                </div>
-                        @endif
-                        <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
-                                        <th>Thời gian tạo</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($brands as $key => $brand)
-                                        <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
-                                            @endif
-                                            <td>{{ $brand->created_at }}</td>
-                                            <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
+                        @if (session('message'))
+                            <div class="card-header">
+                                <p class="noti">{{ session('message') }}</p>
                             </div>
-                            <!-- /.card-body -->
+                        @endif
+                    <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Đơn giá</th>
+                                            <th>Thành tiền</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($order->detailInvoiceExport->sortByDesc('created_at') as $key => $detailInvoiceExport)
+                                            <tr>
+                                                <td> {{$detailInvoiceExport->product->name}}</td>
+                                                <td> {{number_format($detailInvoiceExport->quantity, 0, ",", ".")}}</td>
+                                                <td> {{Lang::get('message.before_unit_money'). number_format($detailInvoiceExport->product->price, 0, ",", "."). Lang::get('message.after_unit_money')}}</td>
+                                                <td> {{Lang::get('message.before_unit_money'). number_format($detailInvoiceExport->into_money, 0, ",", "."). Lang::get('message.after_unit_money')}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <p class="lead">Thông tin đơn đặt hàng </p>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">Tổng tiền</th>
+                                                <td> {{Lang::get('message.before_unit_money'). number_format($order->into_money, 0, ",", "."). Lang::get('message.after_unit_money')}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Khách hàng</th>
+                                                <td> {{$order->name_user}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Số điện thoại</th>
+                                                <td> {{$order->phone_user}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Phương thức thanh toán</th>    
+                                                <td>                                            
+                                                    @if ($order->is_pay_cod)
+                                                    {{Lang::get('message.pay_cod')}}
+                                                    @else
+                                                    {{Lang::get('message.pay_online')}}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Trạng thái thanh toán</th>
+                                                <td>
+                                                    @if ($order->is_payment)
+                                                    {{Lang::get('message.paid')}}
+                                                    @else
+                                                    {{Lang::get('message.pay_not')}}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Thông tin đơn hàng</th>
+                                                <td> {{$order->status_ship}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%">Thông tin thêm</th>
+                                                <td> {{$order->message}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            @if($order->status_ship == Lang::get('message.received'))
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a href="{{URL::to(route('admin.invoice_export.accept_order', ['id'=>$order->id]))}}" class="btn btn-success float-right">
+                                        <i class="far fa-credit-card"></i>
+                                        Xác nhận
+                                    </a>
+                                </div>
+                            </div>
+                            @endif
                         </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+                        <!-- /.invoice -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>

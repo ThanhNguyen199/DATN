@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -60,7 +60,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Danh mục
+                                Danh mục sản phẩm
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -103,8 +103,8 @@
                         </ul>
                     </li>
                     <li class="nav-header">Hóa đơn</li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-file-download"></i>
                             <p>
                                 Hóa đơn nhập
@@ -113,7 +113,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.invoice_import.index')) }}" class="nav-link">
+                                <a href="{{ URL::to(route('admin.invoice_import.index')) }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách hóa đơn</p>
                                 </a>
@@ -163,7 +163,7 @@
                             <p>Thống kê khách hàng</p>
                         </a>
                     </li>
-                    @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
+                    @if (auth()->user()->role->name === Config::get('auth.roles.manager'))
                         <li class="nav-header">Tài khoản</li>
                         <li class="nav-item">
                             <a href="{{ URL::to(route('admin.account.index')) }}" class="nav-link">
@@ -191,13 +191,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Danh sách hóa đơn</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Hóa đơn</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -220,26 +220,43 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
+                                        <th>Thời gian tạo</th>
+                                        @if (auth()->user()->role->name === Config::get('auth.roles.manager'))
                                             <th>Người tạo</th>
                                         @endif
-                                        <th>Thời gian tạo</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($brands as $key => $brand)
+                                    @foreach ($invoicesImport as $key => $invoiceImport)
                                         <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
+                                            <td>{{ $invoiceImport->created_at }}</td>
+                                            @if (auth()->user()->role->name === Config::get('auth.roles.manager'))
+                                                <td>{{ $invoiceImport->user->name }}</td>
                                             @endif
-                                            <td>{{ $brand->created_at }}</td>
+                                            <td> {{ Lang::get('message.before_unit_money') . number_format($invoiceImport->into_money, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                            </td>
+                                            <td>
+                                                @if ($invoiceImport->status)
+                                                    <span class="badge bg-success">Đã thanh toán</span>
+                                                @else
+                                                    <span class="badge bg-danger">Chưa thanh toán</span>
+                                                @endif
+                                            </td>
                                             <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
+                                                @if ($invoiceImport->status)
+                                                    <a
+                                                        href="{{ URL::to(route('admin.invoice_import.show', ['invoice_import' => $invoiceImport->id])) }}">
+                                                        <i class="text-success fas fa-eye ico"></i>
+                                                    </a>
+                                                @else
+                                                    <a
+                                                        href="{{ URL::to(route('admin.invoice_import.edit', ['invoice_import' => $invoiceImport->id])) }}">
+                                                        <i class="fas fa-edit ico"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -33,8 +33,8 @@
                         </a>
                     </li>
                     <li class="nav-header">Sản phẩm</li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-bookmark"></i>
                             <p>
                                 Thương hiệu
@@ -43,7 +43,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link active">
+                                <a href="{{ URL::to(route('admin.brand.index')) }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách thương hiệu</p>
                                 </a>
@@ -60,7 +60,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Danh mục
+                                Danh mục sản phẩm
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-bars"></i>
+                            <i class="nav-icon fas fa-list-ul"></i>
                             <p>
                                 Sản phẩm
                                 <i class="right fas fa-angle-left"></i>
@@ -103,8 +103,8 @@
                         </ul>
                     </li>
                     <li class="nav-header">Hóa đơn</li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-file-download"></i>
                             <p>
                                 Hóa đơn nhập
@@ -119,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ URL::to(route('admin.invoice_import.create')) }}" class="nav-link">
+                                <a href="{{ URL::to(route('admin.invoice_import.create')) }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Nhập hàng</p>
                                 </a>
@@ -163,7 +163,7 @@
                             <p>Thống kê khách hàng</p>
                         </a>
                     </li>
-                    @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
+                    @if (auth()->user()->role->name === Config::get('auth.roles.manager'))
                         <li class="nav-header">Tài khoản</li>
                         <li class="nav-item">
                             <a href="{{ URL::to(route('admin.account.index')) }}" class="nav-link">
@@ -191,70 +191,76 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Danh sách thương hiệu</h1>
+                        <h1 class="m-0">Nhập hàng</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Hóa đơn</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-                            @if (session('message'))
-                                <div class="card-header">
-                                    <p class="noti">{{ session('message') }}</p>
-                                </div>
-                        @endif
-                        <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Tên thương hiệu</th>
-                                        @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                            <th>Người tạo</th>
-                                        @endif
-                                        <th>Thời gian tạo</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($brands as $key => $brand)
-                                        <tr>
-                                            <td>{{ $brand->name }}</td>
-                                            @if(auth()->user()->role->name === Config::get('auth.roles.manager'))
-                                                <td>{{ $brand->user->name }}</td>
-                                            @endif
-                                            <td>{{ $brand->created_at }}</td>
-                                            <td class="act">
-                                                <a href="{{ URL::to(route('admin.brand.edit', ['brand' => $brand->id])) }}">
-                                                    <i class="fas fa-edit ico"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tfoot>
-                                </table>
+                        @if (session('message'))
+                            <div class="card-header">
+                                <p class="noti">{{ session('message') }}</p>
                             </div>
-                            <!-- /.card-body -->
+                    @endif
+                    <!-- Main content -->
+                        <div class="invoice p-3 mb-3">
+                            <!-- Table row -->
+                            <div class="row">
+                                <!-- accepted payments column -->
+                                <div class="col-6">
+                                    <form id="quickForm" action="{{ URL::to(route('admin.invoice_import.store')) }}"
+                                          method="POST">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Chọn sản phẩm</label>
+                                                <div class="input-group">
+                                                    <select class="form-control select2bs4" name="product">
+                                                        <option selected="selected" disabled>Chọn 1 sản phẩm</option>
+                                                        @foreach ($products as $product)
+                                                            <option
+                                                                value="{{ $product->id }}">{{ $product->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Số lượng</label>
+                                                <div class="input-group">
+                                                    <input type="number" name="quantity" class="form-control"
+                                                           placeholder="Nhập vào số lượng">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1" class="required">Giá</label>
+                                                <div class="input-group">
+                                                    <input type="number" name="price" class="form-control"
+                                                           placeholder="Nhập vào giá">
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer text-center">
+                                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
