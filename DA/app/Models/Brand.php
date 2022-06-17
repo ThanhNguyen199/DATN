@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 
 class Brand extends Model
@@ -23,7 +24,22 @@ class Brand extends Model
      */
     protected $fillable = [
         'name',
+        'image',
     ];
+
+    private $modelProduct;
+    private $url;
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->modelProduct = new Product();
+        $this->url = Config::get('app.image.url');
+    }
 
     /**
      * Relation with user
@@ -36,17 +52,47 @@ class Brand extends Model
     }
 
     /**
+     * Relation with brand
+     *
+     * @return HasMany
+     */
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'brand_id');
+    }
+
+    /**
      * Get brands
      *
-     * @return array|void
+     * @return array
+     */
+    public function getNameBrand($request)
+    {
+        try {
+            $brands = Brand::where('name', 'like', '%'.$request->brand.'%')->get();
+            $status = true;
+            $message = null;
+            $data = $brands;
+        } catch (Exception $e) {
+            $status = false;
+            $message = $e->getMessage();
+            $data = null;
+        }
+        return $this->responseData($status, $message, $data);
+    }
+
+    /**
+     * Get brands
+     *
+     * @return array
      */
     public function getBrands()
     {
         try {
-            $categories = Brand::orderBy('id', 'DESC')->get();
+            $brands = Brand::orderBy('id', 'DESC')->get();
             $status = true;
             $message = null;
-            $data = $categories;
+            $data = $brands;
         } catch (Exception $e) {
             $status = false;
             $message = $e->getMessage();
@@ -58,7 +104,8 @@ class Brand extends Model
     /**
      * Get brand
      *
-     * @return void
+     * @param $id
+     * @return array
      */
     public function getBrand($id)
     {
@@ -83,8 +130,8 @@ class Brand extends Model
     /**
      * Add brand
      *
-     * @param mixed $request
-     * @return void
+     * @param $request
+     * @return array
      */
     public function addBrand($request)
     {
@@ -95,12 +142,22 @@ class Brand extends Model
                 return $this->responseData($status, $message);
             }
 
-            $category = new Brand();
-            $category->name = $request->name;
-            $category->user_id = Auth::id();
-            $category->save();
-            $status = true;
-            $message = Lang::get('message.add_done');
+            $brand = new Brand();
+            $brand->name = $request->name;
+            $brand->user_id = Auth::id();
+            if ($request->image_brand) {
+                $image = $this->modelProduct->checkImage($request->image_brand);
+                if ($image['status']) {
+                    $newImage = date('Ymdhis') . '.' . $request->image_brand->getClientOriginalExtension();
+                    $brand->image = $this->url . $newImage;
+                    $request->image_brand->move($this->url, $newImage);
+                    $brand->save();
+                    $status = true;
+                    $message = Lang::get('message.add_done');
+                } else {
+                    throw new Exception($image['message']);
+                }
+            }
         } catch (Exception $e) {
             $status = false;
             $message = $e->getMessage();
@@ -113,7 +170,7 @@ class Brand extends Model
      *
      * @param $request
      * @param $id
-     * @return array|void
+     * @return array
      */
     public function updateBrand($request, $id)
     {
@@ -129,6 +186,18 @@ class Brand extends Model
                 }
                 $brand->name = $request->name;
                 $brand->user_id = Auth::id();
+
+                if ($request->image_brand_edit) {
+                    $image = $this->modelProduct->checkImage($request->image_brand_edit);
+                    if ($image['status']) {
+                        $newImage = date('Ymdhis') . '.' . $request->image_brand_edit->getClientOriginalExtension();
+                        $brand->image = $this->url . $newImage;
+                        $request->image_brand_edit->move($this->url, $newImage);
+                    } else {
+                        throw new Exception($image['message']);
+                    }
+                }
+
                 $brand->save();
                 $status = true;
                 $message = Lang::get('message.update_done');

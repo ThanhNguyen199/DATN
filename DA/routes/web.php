@@ -83,11 +83,9 @@ Route::get('/reset-password',                               [AuthController::cla
 Route::post('/update-password',                             [AuthController::class, 'updatePassword'])                  ->name('update_password');
 
 Route::get('/search',                                       [UserController::class, 'searchProducts'])                  ->name('search_products');
-Route::get('/search-category',                              [UserController::class, 'searchCategories'])                ->name('search_categories');
-Route::get('/search-brand',                                 [UserController::class, 'searchBrands'])                    ->name('search_brands');
 Route::get('/product/{id}',                                 [UserController::class, 'detailProduct'])                   ->name('detail_product');
 Route::post('/product/{id}',                                [UserController::class, 'addCart'])                         ->name('add_cart');
-Route::get('/buy-product/{id}',                             [UserController::class, 'buyProduct'])                      ->name('buy_product');
+Route::post('/buy-product/{id}',                            [UserController::class, 'buyProduct'])                      ->name('buy_product');
 Route::get('/cart',                                         [UserController::class, 'detailCart'])                      ->name('cart');
 Route::post('/update-cart',                                 [UserController::class, 'updateCart'])                      ->name('update_cart');
 Route::get('/delete-cart/{id}',                             [UserController::class, 'deleteCart'])                      ->name('delete_cart');
@@ -96,9 +94,11 @@ Route::get('/search-order',                                 [UserController::cla
 
 //User Authenticate
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::post('/comment/{id}',                           [UserController::class, 'addComment'])                       ->name('comment');
+    Route::post('/comment/{id}',                            [UserController::class, 'addComment'])                       ->name('comment');
     Route::get('/info',                                     [AuthController::class, 'initScreenInfo'])                   ->name('screen_info');
     Route::post('/update-info',                             [AuthController::class, 'updateInfo'])                       ->name('update_info');
     Route::post('/change-password',                         [AuthController::class, 'changePassword'])                   ->name('change_password');
     Route::get('/logout',                                   [AuthController::class, 'logout'])                           ->name('logout');
+    Route::get('/history-order',                            [UserController::class, 'historyOrder'])                     ->name('history_order');
+    Route::get('/detail-order/{id}',                        [UserController::class, 'detailOrder'])                      ->name('detail_order');
 });

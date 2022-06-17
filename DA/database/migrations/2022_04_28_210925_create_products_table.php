@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('user_id')->constrained('users');
             $table->integer('price');
+            $table->integer('price_down');
+            $table->date('start_promotion');
+            $table->date('end_promotion');
             $table->integer('quantity')->default(0);
             $table->string('image')->nullable();
             $table->text('short_description')->nullable();
