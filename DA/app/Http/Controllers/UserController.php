@@ -207,11 +207,11 @@ class UserController extends Controller
         if (!$response['status']) {
             return back()->with('message', $message);
         }
-        if (!Cart::count()){
-            return redirect(route('screen_home'));
-        }
         $brands = Brand::all();
         $categories = Category::all();
+        if (!Cart::count()){
+            return view('user.cart.empty_cart', compact('products', 'message', 'user', 'brands', 'categories'));
+        }
         return view('user.cart.detail', compact('products', 'message', 'user', 'brands', 'categories'));
     }
     
@@ -347,5 +347,75 @@ class UserController extends Controller
     {
         $this->modelComment->addComments($request, $id);
         return back();
+    }
+
+    /**
+     * Request screen blog
+     *
+     * @param Request $request
+     * @return Application|Factory|View|RedirectResponse
+     */
+    public function searchBlog(Request $request)
+    {
+        $products = Product::where([['active', '1'], ['is_deleted', '0']])->orderBy('id', 'desc')->get();
+        $brands = Brand::all();
+        $categories = Category::all();
+        $response = $this->modelInvoiceExport->getProductPaidFromInvoiceExport(date('Y-m-d', strtotime('-3 months')), date('Y-m-d', strtotime('now')));
+        $productsMax = $response['data'];
+        return view('user.blog.blog')->with('products', $products)
+                                ->with('brands', $brands)
+                                ->with('categories', $categories)
+                                ->with('productsMax', $productsMax);
+    }
+
+    /**
+     * Request screen blog
+     *
+     * @param Request $request
+     * @return Application|Factory|View|RedirectResponse
+     */
+    public function searchBlogDetail(Request $request)
+    {
+        $products = Product::where([['active', '1'], ['is_deleted', '0']])->orderBy('id', 'desc')->get();
+        $brands = Brand::all();
+        $categories = Category::all();
+        $response = $this->modelInvoiceExport->getProductPaidFromInvoiceExport(date('Y-m-d', strtotime('-3 months')), date('Y-m-d', strtotime('now')));
+        $productsMax = $response['data'];
+        return view('user.blog.blog_detail')->with('products', $products)
+                                ->with('brands', $brands)
+                                ->with('categories', $categories)
+                                ->with('productsMax', $productsMax);
+    }
+
+    /**
+     * Search contact
+     *
+     * @param Request $request
+     * @return Application|Factory|View|RedirectResponse
+     */
+    public function searchContact(Request $request)
+    {
+        $response = $this->modelProduct->searchProducts($request);
+        $products = $response['data'];
+        $message = $response['message'];
+        if (!$response['status']) {
+            return back()->with('message', $message);
+        }
+
+        $response = $this->modelCategory->getCategories();
+        $categories = $response['data'];
+        $message = $response['message'];
+        if (!$response['status']) {
+            return back()->with('message', $message);
+        }
+
+        $response = $this->modelBrand->getBrands();
+        $brands = $response['data'];
+        $message = $response['message'];
+        if (!$response['status']) {
+            return back()->with('message', $message);
+        }
+
+        return view('user.contact.contact', compact('products', 'request', 'categories', 'brands'));
     }
 }

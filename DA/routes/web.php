@@ -92,6 +92,11 @@ Route::get('/delete-cart/{id}',                             [UserController::cla
 Route::post('/create-order',                                [UserController::class, 'createOrder'])                     ->name('create_order');
 Route::get('/search-order',                                 [UserController::class, 'searchOrder'])                     ->name('search_order');
 
+Route::get('/blog',                                         [UserController::class, 'searchBlog'])                      ->name('search_blog');
+Route::get('/blog-detail',                                  [UserController::class, 'searchBlogDetail'])                ->name('search_blog_detail');
+Route::get('/contact',                                      [UserController::class, 'searchContact'])                   ->name('search_contact');
+
+
 //User Authenticate
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/comment/{id}',                            [UserController::class, 'addComment'])                       ->name('comment');

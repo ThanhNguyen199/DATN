@@ -4,16 +4,41 @@
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
         <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-
         </a>
-
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-
         </a>
-
-        <span class="stext-109 cl4">
-
-        </span>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<!-- Title page -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{{ URL::to(route('screen_home')) }}" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+        <a href="{{ URL::to(route('search_products')) }}" class="stext-109 cl8 hov-cl1 trans-04">
+            Sản phẩm
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+        <a href="" class="stext-109 cl8 hov-cl1 trans-04">
+            {{ $product->name }}
+        </a>
     </div>
 </div>
 <!-- Product Detail -->
@@ -138,8 +163,11 @@
                                     </div>
                                 </form>
                                 @endif
+
                                 @if (session('message'))
-                                <p class="noti">{{ session('message') }}</p>
+                                <h4 class="mtext-105 cl2 js-name-detail p-b-14 noti">
+                                    {{ session('message') }}
+                                </h4>
                                 @endif
                         </div>
                     </div>

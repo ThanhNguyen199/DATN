@@ -25,7 +25,7 @@
 </div>
 
 <!-- Shoping Cart -->
-<form class="bg0 p-t-75 p-b-85">
+<section class="bg0 p-t-75 p-b-85">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -33,14 +33,14 @@
                     <form action="{{ URL::to(route('update_cart')) }}" method="POST">
                         @csrf
                         <div class="wrap-table-shopping-cart">
-                            <table class="table-shopping-cart" style="width:100%">
+                            <table class="table-shopping-cart">
                                 <tr class="table_head">
                                     <th class="column-1" style="width:10%">Sản phẩm</th>
                                     <th class="column-2" style="width:20%"></th>
                                     <th class="column-3" style="width:25%">Đơn giá</th>
                                     <th class="column-4" style="width:5%; text-align: center;">Số lượng</th>
-                                    <th class="column-5" style="width:30%">Thành tiền</th>
-                                    <th class="column-6" style="width:10%"></th>
+                                    <th class="column-4" style="width:30%">Thành tiền</th>
+                                    <th class="column-5" style="width:10%"></th>
                                 </tr>
 
                                 <?php $total = 0; ?>
@@ -61,18 +61,18 @@
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" name="{{$productCart[0]['rowId']}}" value="{{ $productCart[0]['qty'] }}" min="1" required type="number" id="quantity">
+                                            <input id="quantity" class="mtext-104 cl3 txt-center num-product" name="{{$productCart[0]['rowId']}}" value="{{ $productCart[0]['qty'] }}" min="1" required type="number">
 
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="column-5">{{ Lang::get('message.before_unit_money') . number_format($productCart[0]['qty'] * $productCart[0]['price'], 0, ',', '.') . Lang::get('message.after_unit_money') }}</td>
+                                    <td class="column-4">{{ Lang::get('message.before_unit_money') . number_format($productCart[0]['qty'] * $productCart[0]['price'], 0, ',', '.') . Lang::get('message.after_unit_money') }}</td>
                                     <?php $total = (int) $total + (int) $productCart[0]['qty'] * (int) $productCart[0]['price']; ?>
-                                    <td class="column-6">
+                                    <td class="column-5" style="padding-right: 20px;">
                                         <a type="button" href="{{ URL::to(route('delete_cart', ['id' => $productCart[0]['rowId']])) }}">
-                                            <i id="btnMinus" class="fas fa-trash"></i>
+                                            <img src="{{ asset('images/trash-bin.jpg')}}" style="height: 20px; width: 20px;" alt="IMG-BLOG">
                                         </a>
                                     </td>
                                 </tr>
@@ -81,7 +81,6 @@
                                 @endforeach
                             </table>
                         </div>
-
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <button type="submit" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15">
                                 Cập nhật giỏ hàng
@@ -147,7 +146,7 @@
                                     </button>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                     </div>
-                                    <button id="paypal-button" class="bor14 stext-101 flex-c-m"  >
+                                    <button id="paypal-button" class="bor14 stext-101 flex-c-m">
                                     </button>
                                 </div>
                             </div>
@@ -158,5 +157,5 @@
             </div>
         </div>
     </div>
-</form>
+</section>
 @endsection

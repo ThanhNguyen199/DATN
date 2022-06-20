@@ -1,76 +1,110 @@
 @extends('user.layout')
 @section('user_content')
-    <!-- Open Content -->
-    <section class="bg-success py-5" id="user_detail">
-        <div class="container rounded bg-white mt-5 mb-5">
-            <div class="row">
-                <div class="col-md-1 border-right"></div>
-                <div class="col-md-6 border-right">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Thông tin</h4>
-                        </div>
-                        <form action="{{ URL::to(route('update_info')) }}" method="POST">
-                            @csrf
-                            <div class="row mt-2">
-                                <div class="col-md-12"><label class="labels">Họ và tên</label>
-                                    <input type="text" name="name" class="form-control" required placeholder="Nhập vào họ và tên" value="{{$user->name}}">
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-12"><label class="labels">Số điện thoại</label>
-                                    <input type="text" name="phone" class="form-control" required  placeholder="Nhập vào số điện thoại" value="{{$user->phone}}">
-                                </div>
-                                <div class="col-md-12"><label class="labels">Địa chỉ</label>
-                                    <input type="text" name="address" class="form-control" placeholder="Nhập vào địa chỉ" value="{{$user->address}}">
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-5"><label class="labels">Email</label>
-                                    <p>{{$user->email}}</p>
-                                </div>
-                                <div class="col-md-6"><label class="labels">Tên đăng nhập</label>
-                                    <p>{{$user->username}}</p>
-                                </div>
-                            </div>
-                            <div class="mt-5 text-center">
-                                <button class="btn btn-primary profile-button" type="submit">
-                                    Lưu thông tin
-                                </button>
-                            </div>
-                        </form>
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<!-- Title page -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{{ URL::to(route('screen_home')) }}" class="stext-109 cl8 hov-cl1 trans-04">
+            Trang chủ 
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="" class="stext-109 cl8 hov-cl1 trans-04">
+            Quản lý tài khoản
+        </a>
+    </div>
+</div>
+<!-- Content page -->
+<section class="bg0 p-t-10 p-b-116">
+    <div class="container">
+        <div class="flex-w flex-tr">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                <form action="{{ URL::to(route('update_info')) }}" method="POST">
+                    @csrf
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Thông tin của bạn
+                    </h4>
+
+                    <p>Họ và tên</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="text" name="name" placeholder="Nhập Họ tên của bạn" value="{{$user->name}}">
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-3 py-5">
-                        <form action="{{ URL::to(route('change_password')) }}" method="POST">
-                            @csrf
-                            <div class="d-flex justify-content-between align-items-center experience">
-                                <h4 class="text-right">Thay đổi mật khẩu</h4>
-                            </div><br>
-                            <div class="col-md-12"><label class="labels">Mật khẩu cũ</label>
-                                <input type="password" name="old_password" required class="form-control" placeholder="Mật khẩu cũ">
-                            </div>
-                            <br>
-                            <div class="col-md-12"><label class="labels">Mật khẩu mới</label>
-                                <input type="password" name="password" required class="form-control" placeholder="Nhập mật khẩu mới">
-                            </div>
-                            <br>
-                            <div class="col-md-12"><label class="labels">Xác nhận mật khẩu</label>
-                                <input type="password" name="confirm_password" required class="form-control" placeholder="Xác nhận mật khẩu">
-                            </div>
-                            <br>
-                            <button class="btn btn-success profile-button" type="submit">
-                                Đổi mật khẩu
-                            </button>
-                        </form>
+                    <p>Số điện thoại</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="text" name="phone" placeholder="Nhập SDT của bạn" value="{{$user->phone}}">
                     </div>
-                    @if (session('message'))
-                        <p class="noti">{{ session('message') }}</p>
-                    @endif
-                </div>
+
+                    <p>Địa chỉ</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="text" name="address" placeholder="Nhập địa chỉ của bạn" value="{{$user->address}}">
+                    </div>
+                    <p>Email</p>
+                    <div class="m-b-20 how-pos4-parent">
+                        <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">{{$user->email}}</p>
+                    </div>
+                    <p>Tên tài khoản</p>
+                    <div class="m-b-20 how-pos4-parent">
+                        <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">{{$user->username}}</p>
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-119 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" style="left: 0;" type="submit">
+                        Lưu thông tin
+                    </button>
+                </form>
+            </div>
+
+            <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                <form action="{{ URL::to(route('change_password')) }}" method="POST">
+                    @csrf
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Thay đổi mật khẩu
+                    </h4>
+
+                    <p>Mật khẩu cũ</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="password" name="old_password" placeholder="Nhập mật khẩu cũ">
+                    </div>
+                    <p>Mật khẩu mới</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="password" name="password" placeholder="Nhập mật khẩu mới">
+                    </div>
+
+                    <p>Xác nhận mật khẩu</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="password" name="confirm_password" placeholder="Xác nhận mật khẩu mới">
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-119 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" style="left: 0;" type="submit">
+                        Đổi mật khẩu
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
-    <!-- Close Banner -->
+    </div>
+</section>
+<!-- Close Banner -->
 @endsection

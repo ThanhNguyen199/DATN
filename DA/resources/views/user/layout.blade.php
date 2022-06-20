@@ -5,21 +5,12 @@
     <title>Coza Store</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/templatemo.css') }}" />
-    <!-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" /> -->
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}" />
-
-    <!-- Slick -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick-theme.css') }}" />
-
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{ asset('images/icons/favicon.png')}}" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}">
     <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/iconic/css/material-design-iconic-font.min.css')}}">
@@ -90,15 +81,11 @@
                             </li>
 
                             <li>
-                                <a href="blog.html">Tin tức</a>
+                                <a href="{{ URL::to(route('search_blog')) }}">Tin tức</a>
                             </li>
 
                             <li>
-                                <a href="about.html">Cửa hàng </a>
-                            </li>
-
-                            <li>
-                                <a href="contact.html">Liên hệ</a>
+                                <a href="{{ URL::to(route('search_contact')) }}">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -126,17 +113,17 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" style="z-index: 1;">
                                 <li>
-                                    <a href="{{ URL::to(route('screen_info')) }}" class="dropdown-item" id="filter_menu" type="button">
+                                    <a href="{{ URL::to(route('screen_info')) }}" class="dropdown-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" id="filter_menu" type="button">
                                         {{ auth()->user()->name }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ URL::to(route('history_order')) }}" class="dropdown-item" id="filter_menu" type="button">
+                                    <a href="{{ URL::to(route('history_order')) }}" class="dropdown-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" id="filter_menu" type="button">
                                         Lịch sử đơn hàng
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ URL::to(route('logout')) }}" type="button">
+                                    <a class="dropdown-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" href="{{ URL::to(route('logout')) }}" type="button">
                                         Đăng xuất </a>
                                 </li>
                             </ul>
@@ -294,7 +281,7 @@
                         <li class="p-b-10">
                             @if (Auth::check() && Auth::user()->role->name === Config::get('auth.roles.user'))
                             <a href="{{ URL::to(route('history_order')) }}" class="stext-107 cl7 hov-cl1 trans-04">
-                                Lịch sử đơn hàng
+                                Lịch sử mua hàng
                             </a>
                             @else
                             <a href="{{ URL::to(route('search_order')) }}" class="stext-107 cl7 hov-cl1 trans-04">
@@ -305,13 +292,13 @@
                         </li>
 
                         <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Shipping
+                            <a href="{{ URL::to(route('search_contact')) }}" class="stext-107 cl7 hov-cl1 trans-04">
+                                Giới thiệu
                             </a>
                         </li>
 
                         <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            <a href="{{ URL::to(route('search_contact')) }}" class="stext-107 cl7 hov-cl1 trans-04">
                                 FAQs
                             </a>
                         </li>
@@ -470,47 +457,10 @@
     <!--===============================================================================================-->
     <script src="{{ asset('js/main.js')}}"></script>
 
-
-    <script src="{{ asset('assets/js/jquery-1.11.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/templatemo.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/custom.js') }}"></script> -->
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <!-- End Script -->
 
-    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
-    <script>
-        $('#carousel-related-product').slick({
-            infinite: true,
-            arrows: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
-            dots: true,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                    },
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3,
-                    },
-                },
-            ],
-        });
-    </script>
     <script>
         var intoMoney = document.getElementById('total').value
         var total = Math.round((intoMoney / 23083) * 100) / 100
