@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Lang;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -112,7 +113,7 @@ class Product extends Model
     public function scopeCategory($query, $request)
     {
         if ($request->has('category') && !is_null($request->category)) {
-            $category = Category::select('id')->where('name', 'LIKE', '%' . $request->category . '%')->get();
+            $category = Category::select('id')->where('id', $request->category)->first();
             $query->whereIn('category_id', $category);
         }
         return $query;
@@ -128,8 +129,8 @@ class Product extends Model
     public function scopeBrand($query, $request)
     {
         if ($request->has('brand') && !is_null($request->brand)) {
-            $brand = Brand::select('id')->where('name', 'LIKE', '%' . $request->brand . '%')->get();
-            $query->where('brand_id', $brand);
+            $brand = Brand::select('id')->where('id', $request->brand)->first();
+            $query->whereIn('brand_id', $brand);
         }
         return $query;
     }
@@ -144,7 +145,7 @@ class Product extends Model
     public function scopeTitle($query, $request)
     {
         if ($request->has('product') && !is_null($request->product)) {
-            $query->where('name', 'LIKE', '%' . $request->product . '%');
+            $query->where(DB::raw('lower(name)'), 'LIKE',  '%' . Str::lower($request->product) .  '%');
         }
         return $query;
     }
@@ -323,7 +324,7 @@ class Product extends Model
                     throw new Exception($image['message']);
                 }
             }
-            
+
             if (isset($request->active)) {
                 $product->active = true;
             } else {
@@ -438,7 +439,7 @@ class Product extends Model
             $data = '';
             $product = Product::find($id);
             if ($product && !$product->is_deleted && $product->active) {
-                if ($product->quantity < $request->quantity) {
+                if ($product->quantity < $request->quanity || (int)Cart::count($product->id) + (int)$request->quanity > $product->quantity ) {
                     $message = Lang::get('message.quantity_not_enough');
                 } else {
                     $status = true;
@@ -472,14 +473,18 @@ class Product extends Model
             $data = '';
             $product = Product::find($id);
             if ($product && !$product->is_deleted) {
-                $status = true;
-                $message = '';
-                $now = Carbon::now()->toDateTimeString();
-                $price = $product->price;
-                if ($now <= $product->end_promotion && $now >= $product->start_promotion){
-                    $price = $product->price_down;
+                if ($product->quantity < $request->quanity || (int)Cart::count($product->id) + (int)$request->quanity > $product->quantity ) {
+                    $message = Lang::get('message.quantity_not_enough');
+                } else {
+                    $status = true;
+                    $message = '';
+                    $now = Carbon::now()->toDateTimeString();
+                    $price = $product->price;
+                    if ($now <= $product->end_promotion && $now >= $product->start_promotion){
+                        $price = $product->price_down;
+                    }
+                    Cart::add(['id' => $product->id, 'name' => $product->name, 'price' => $price, 'weight' => 0, 'qty' => $request->quanity]);
                 }
-                Cart::add(['id' => $product->id, 'name' => $product->name, 'price' => $price, 'weight' => 0, 'qty' => $request->quanity]);
             }
         } catch (Exception $e) {
             $status = false;
@@ -525,8 +530,15 @@ class Product extends Model
                     if ($product < 1){
                         $message = Lang::get('message.quantity_more_than_1');
                         return $this->responseData($status, $message);
-                    } else {
+                    }
+                    else {
+                        $productDetail = Product::find(Cart::get($key)->id);
+                        if ($productDetail->quantity < $product){
+                            $message = Lang::get('message.quantity_not_enough');
+                        } else {
+
                         Cart::update($key, $product);
+                        }
                     }
                 }
             }

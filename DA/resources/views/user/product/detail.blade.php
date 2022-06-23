@@ -128,6 +128,16 @@
                                 {{ $product->category->name }}
                             </span>
                         </li>
+
+                        <li class="flex-w flex-t p-b-7">
+                            <span class="stext-102 cl3 size-205">
+                                Số lượng hiện có
+                            </span>
+
+                            <span class="stext-102 cl6 size-206">
+                                {{ $product->quantity }}
+                            </span>
+                        </li>
                     </ul>
                 </div>
                 <!-- add cart -->
@@ -264,7 +274,66 @@
     </div>
 </section>
 <!-- Suggestions Products -->
+@if ( $product->category->id != 4)
+<section class="sec-relate-product bg0 p-t-45 p-b-105">
+    <div class="container">
+        <div class="p-b-45">
+            <h3 class="ltext-106 cl5 txt-center">
+                Gợi ý sản phẩm 
+            </h3>
+        </div>
 
+        <!-- Slide2 -->
+        @foreach ($categories->take(4) as $key => $catego)
+        @if ( $catego->id == 4)
+        <div class="wrap-slick2">
+            <div class="slick2">
+                @foreach ($catego->product->take(8) as $key => $pro)
+                <!-- Block2 -->
+                @if ($product->id != $pro->id)
+                <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="@if (isset($pro->image)) {{ asset('' . $pro->image) }} @else {{ asset('' . Config::get('app.image.default')) }} @endif" alt="IMG-PRODUCT">
+
+                            <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                Xem ngay
+                            </a>
+                        </div>
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    {{ $pro->name }}
+                                </a>
+
+                                <span class="stext-105 cl3">
+                                    <?php $now = Carbon\Carbon::now()->toDateTimeString() ?>
+                                    @if ($now <= $pro->end_promotion && $now >= $pro->start_promotion)
+                                        <li class="text-right text-dark" style="font-weight: bold!important">
+                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price_down, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                        </li>
+                                        <li class="text-right text-dark" style="text-decoration: line-through">
+                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                        </li>
+                                        @else
+                                        <li class="text-right text-dark" style="font-weight: bold!important">
+                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                        </li>
+                                        @endif
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @endforeach
+            </div>
+        </div>
+        @endif
+        @endforeach
+    </div>
+</section>
+@endif
 <!-- Related Products -->
 <section class="sec-relate-product bg0 p-t-45 p-b-105">
     <div class="container">

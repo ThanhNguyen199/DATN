@@ -1,79 +1,75 @@
 @extends('user.layout')
 @section('user_content')
-    <!-- Open Content -->
-    <section class="bg-light">
-        <div class="container pb-5">
-            <div class="row">
-                <div class="mt-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="" method="GET" class="form-inline">
-                                <div class="pb-2">
-                                    <h5 class="card-title">
-                                        Nhập vào mã đơn hàng của bạn
-                                    </h5>
-                                    
-                                    <div class="form-group mr-2">
-                                        <input type="text" class="form-control" name="code_invoice" id="inputOrderCode" required
-                                            placeholder="Nhập vào mã đơn hàng" />
-                                    </div>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg">
-                                            Tìm kiếm
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            @if (isset($order))
-                            <div class="form-group mr-2 pt-4" >
-                                <h3>Đơn hàng: {{$order->code_invoice}}</h3>
-                                <p>Trạng thái: {{$order->status_ship}}</p>
-                                <p>Số tiền cần thanh toán: {{ Lang::get('message.before_unit_money') . number_format($order->need_pay, 0, ',', '.') . Lang::get('message.after_unit_money') }}</p>
-                            </div>
-                            @else
-                            @if (session('message'))
-                            <div class="card-header">
-                                <p class="noti">{{ session('message') }}</p>
-                            </div>
-                            @endif
-                            @endif
-                        </div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        </a>
+    </div>
+</div>
+
+<!-- Content page -->
+<section class="bg0 p-t-10 p-b-116">
+    <div class="container">
+        <form action="" method="GET" class="form-inline">
+            <div class="flex-w flex-tr">
+                <div class="bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                    <div class="m-b-20 how-pos4-parent">
+                        <p class="mtext-111 cl2 plh3 size-116 p-l-25 p-r-30">Nhập vào mã đơn hàng cần tìm</p>
+                        <input class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30" type="text" name="code_invoice" placeholder="Nhập mã đơn hàng">
                     </div>
+                    <button type="submit" style="width: 200px;" class="flex-c-m stext-101 cl0 size-119 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+                        Tìm kiếm
+                    </button>
+                </div>
+            </div>
+        </form>
+        @if (isset($order))
+        <div class="flex-w flex-tr">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-lr-15-lg w-full-md">
+                <div class="m-b-20 how-pos4-parent">
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">Mã đơn hàng</p>
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">Trạng thái</p>
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">Đơn giá</p>
+                </div>
+            </div>
+
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-lr-15-lg w-full-md">
+                <div class="m-b-20 how-pos4-parent">
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">{{ $order->code_invoice }}</p>
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">{{ $order->status_ship }}</p>
+                    <p class="stext-111 cl2 plh3 size-116 p-l-25 p-r-30">{{ Lang::get('message.before_unit_money') . number_format($order->need_pay, 0, ',', '.') . Lang::get('message.after_unit_money') }}</p>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="py-5" style="margin-top:24px">
-        <div class="container my-4">
-          <div class="row text-center py-3">
-            <div class="col-lg-6 m-auto">
-             
-            </div>
-            <div class="col-lg-9 m-auto tempaltemo-carousel">
-              <div class="row d-flex flex-row">
-                <!--Controls-->
-                <div class="col-1 align-self-center">
-                  
-                </div>
-                <!--End Controls-->
-  
-                <!--Carousel Wrapper-->
-                <div class="col">
-                 
-                </div>
-                <!--End Carousel Wrapper-->
-  
-                <!--Controls-->
-                <div class="col-1 align-self-center">
-                  
-                </div>
-                <!--End Controls-->
-              </div>
-            </div>
-          </div>
+        @else
+        @if (session('message'))
+        <div class="">
+            <p class="noti">{{ session('message') }}</p>
         </div>
-      </section>
-    <!-- Close Content -->
+        @endif
+        @endif
+    </div>
+    <div class="container">
+
+    </div>
+</section>
+<!-- Close Content -->
 @endsection

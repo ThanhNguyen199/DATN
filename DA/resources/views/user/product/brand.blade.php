@@ -21,9 +21,9 @@
                 @if (session('message'))
                     <p class="noti">{{ session('message') }}</p>
                 @endif
-                @if (isset($brand))
+                @if (isset($product))
                 <div class="row">
-                    @foreach ($brand as $key => $bra)
+                    @foreach ($product as $key => $bra)
                         <div class="col-md-4">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">

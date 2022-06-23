@@ -183,7 +183,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-sliders-h"></i>
                                 <p>
-                                    Sidebar
+                                    Slidebar
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -191,13 +191,13 @@
                                 <li class="nav-item">
                                     <a href="{{ URL::to(route('admin.sidebar.index')) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách sidebar</p>
+                                        <p>Danh sách slidebar</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ URL::to(route('admin.sidebar.create')) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Side bar</p>
+                                        <p>Thêm Slidebar</p>
                                     </a>
                                 </li>
                             </ul>
@@ -217,13 +217,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Thêm thương hiệu</h1>
+                        <h1 class="m-0">Tạo hóa đơn nhập hàng</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ URL::to(route('screen_admin_home')) }}">Trang
                                     chủ</a></li>
-                            <li class="breadcrumb-item active">Thương hiệu</li>
+                            <li class="breadcrumb-item active">Hóa đơn nhập</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

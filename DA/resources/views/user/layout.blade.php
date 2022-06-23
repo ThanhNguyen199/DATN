@@ -263,12 +263,11 @@
                     </h4>
 
                     <ul>
-                        @foreach ($categories as $key => $category)
-                        @if ($key < 5) <li class="p-b-10">
-                            <a class="stext-107 cl7 hov-cl1 trans-04" href="{{ URL::to(route('search_products')) }}?category={{ $category->name }}">{{ $category->name }}</a>
-                            </li>
-                            @endif
-                            @endforeach
+                        @foreach ($categories->take(4) as $key => $category)
+                        <li class="p-b-10">
+                            <a class="stext-107 cl7 hov-cl1 trans-04" href="{{ URL::to(route('search_products')) }}?category={{ $category->id }}">{{ $category->name }}</a>
+                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -307,12 +306,12 @@
 
                 <div class="col-sm-6 col-lg-3 p-b-50">
                     <h4 class="stext-301 cl0 p-b-30">
-                        Công Ty Cổ Phần 
+                        Công Ty Cổ Phần
                     </h4>
 
                     <p class="stext-107 cl7 size-201">
-                    ĐKKD/MST: 0313891315 do sở KH&ĐT TP.HCM cấp 04/07/2016 <br>
-                    Trụ sở: 123 Lê Văn Việt, Quận 9, TP.HCM
+                        ĐKKD/MST: 0313891315 do sở KH&ĐT TP.HCM cấp 04/07/2016 <br>
+                        Trụ sở: 123 Lê Văn Việt, Quận 9, TP.HCM
                     </p>
 
                     <div class="p-t-27">

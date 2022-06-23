@@ -62,107 +62,102 @@
                         <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
                         </button>
-                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" class="form-control" placeholder="Tìm kiếm" 
-                            name="product" @if ($request->product) value = "{{ $request->product }}" @endif>
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" class="form-control" placeholder="Tìm kiếm" name="product" @if ($request->product) value = "{{ $request->product }}" @endif>
                     </div>
                 </form>
             </div>
 
             <!-- Filter -->
             <div class="dis-none panel-filter w-full p-t-10">
-                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                    <div class="filter-col1 p-r-15 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Danh mục
-                        </div>
+                <form method="GET" action="{{ URL::to(route('search_products')) }}">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" name="product"
+                        @if ($request->product) value = "{{ $request->product }}" @endif>
+                    <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+                        <div class="filter-col1 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Danh mục
+                            </div>
 
-                        <ul>
-                            <li class="p-b-6">
-                                <a href="{{ URL::to(route('search_products')) }}" class="filter-link stext-106 trans-04">
-                                    Tất cả
-                                </a>
-                            </li>
-                            @foreach ($categories as $key => $category)
-                            @if ($key < 5) <li class="p-b-10">
-                                <a class="filter-link stext-106 trans-04" href="{{ URL::to(route('search_products')) }}?category={{ $category->name }}">{{ $category->name }}</a>
-                                </li>
-                                @endif
+                            <select class="p-b-6 stext-106 trans-04" name="category">
+                                <option class="p-b-6 stext-106 trans-04" selected value="">Tất cả</option>
+                                @foreach ($categories as $key => $category)
+                                <option class="p-b-6 stext-106 trans-04" value="{{ $category->id }}" @if ($request->category == $category->id) selected
+                                    @endif >
+                                    {{ $category->name }}
+                                </option>
                                 @endforeach
-                        </ul>
-                    </div>
-
-                    <div class="filter-col2 p-r-15 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Thương hiệu
+                            </select>
                         </div>
 
-                        <ul>
-                            <li class="p-b-6">
-                                <a href="{{ URL::to(route('search_products')) }}" class="filter-link stext-106 trans-04">
-                                    Tất cả
-                                </a>
-                            </li>
-                            @foreach ($brands as $key => $bra)
-                            @if ($key < 5) 
-                                <li class="p-b-10">
-                                    <a class="filter-link stext-106 trans-04" href="{{ URL::to(route('search_products')) }}?brand={{ $bra->name }}">{{ $bra->name }}</a>
-                                </li>
-                            @endif
-                            @endforeach                            
-                        </ul>
+                        <div class="filter-col2 p-r-15 p-b-27">
+                            <div class="mtext-102 cl2 p-b-15">
+                                Thương hiệu
+                            </div>
+
+                            <select class="p-b-6 stext-106 trans-04" name="brand">
+                                <option class="p-b-6 stext-106 trans-04" selected value="">Tất cả</option>
+                                @foreach ($brands as $key => $brand)
+                                <option class="p-b-6 stext-106 trans-04" value="{{ $brand->id }}" @if ($request->brand == $brand->id) selected
+                                    @endif >
+                                    {{ $brand->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4" type="submit">Tìm kiếm</button>
                     </div>
-
-
-                </div>
+                </form>
             </div>
         </div>
 
         <div class="row isotope-grid">
             @foreach ($products as $key => $pro)
-                <!-- Block2 -->
-                <div class="col-sm-6 col-md-4  p-b-35 isotope-item">
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="@if (isset($pro->image)) {{ asset('' . $pro->image) }} @else {{ asset('' . Config::get('app.image.default')) }} @endif" alt="IMG-PRODUCT">
+            <!-- Block2 -->
+            <div class="col-sm-6 col-md-4  p-b-35 isotope-item">
+                <div class="block2">
+                    <div class="block2-pic hov-img0">
+                        <img src="@if (isset($pro->image)) {{ asset('' . $pro->image) }} @else {{ asset('' . Config::get('app.image.default')) }} @endif" alt="IMG-PRODUCT">
 
-                            <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                Xem ngay
+                        <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                            Xem ngay
+                        </a>
+                    </div>
+                    <div class="block2-txt flex-w flex-t p-t-14">
+                        <div class="block2-txt-child1 flex-col-l ">
+                            <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                {{ $pro->name }}
                             </a>
-                        </div>
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="{{ URL::to(route('detail_product', ['id' => $pro->id])) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    {{ $pro->name }}
-                                </a>
 
-                                <span class="stext-105 cl3">
-                                    <?php $now = Carbon\Carbon::now()->toDateTimeString() ?>
-                                    @if ($now <= $pro->end_promotion && $now >= $pro->start_promotion)
-                                        <li class="text-right text-dark" style="font-weight: bold!important">
-                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price_down, 0, ',', '.') . Lang::get('message.after_unit_money') }}
-                                        </li>
-                                        <li class="text-right text-dark" style="text-decoration: line-through">
-                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
-                                        </li>
-                                        @else
-                                        <li class="text-right text-dark" style="font-weight: bold!important">
-                                            {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
-                                        </li>
-                                        @endif
-                                </span>
-                            </div>
+                            <span class="stext-105 cl3">
+                                <?php $now = Carbon\Carbon::now()->toDateTimeString() ?>
+                                @if ($now <= $pro->end_promotion && $now >= $pro->start_promotion)
+                                    <li class="text-right text-dark" style="font-weight: bold!important">
+                                        {{ Lang::get('message.before_unit_money') . number_format($pro->price_down, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                    </li>
+                                    <li class="text-right text-dark" style="text-decoration: line-through">
+                                        {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                    </li>
+                                    @else
+                                    <li class="text-right text-dark" style="font-weight: bold!important">
+                                        {{ Lang::get('message.before_unit_money') . number_format($pro->price, 0, ',', '.') . Lang::get('message.after_unit_money') }}
+                                    </li>
+                                    @endif
+                            </span>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            @endforeach            
         </div>
 
         <!-- Load more -->
-        <div class="flex-c-m flex-w w-full p-t-45">
+        @if($key > 12)
+        <div class="flex-c-m flex-w w-full p-t-45">           
             <a href="{{ URL::to(route('search_products')) }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                 Xem thêm
             </a>
         </div>
+        @endif
     </div>
 </div>
 

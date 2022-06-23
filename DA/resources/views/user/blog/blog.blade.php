@@ -41,8 +41,8 @@
                 <div class="p-r-45 p-r-0-lg">
                     <!-- item blog -->
                     <div class="p-b-63">
-                        <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                            <img src="images/blog-04.jpg" alt="IMG-BLOG">
+                        <a href="{{ URL::to(route('search_blog_detail')) }}" class="hov-img0 how-pos5-parent">
+                            <img src="{{ asset('images/blog-04.jpg')}}" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                 <span class="ltext-107 cl2 txt-center">
@@ -50,31 +50,26 @@
                                 </span>
 
                                 <span class="stext-109 cl3 txt-center">
-                                    Jan 2018
+                                    June 2022
                                 </span>
                             </div>
                         </a>
 
                         <div class="p-t-32">
                             <h4 class="p-b-15">
-                                <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                    8 Inspiring Ways to Wear Dresses in the Winter
+                                <a href="{{ URL::to(route('search_blog_detail')) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                    8 Sai Lầm Cơ Bản Dễ Mắc Phải Khi Đạp Xe?
                                 </a>
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                            Nếu là người yêu thích đạp xe và muốn nâng cao sức khỏe nhờ vào đó thì bạn cần phải nắm chắc những sai lầm cơ bản khi đạp xe để tránh những tổn thương không đáng có. Dưới đây là những sai lầm mà bạn có thể đang mắc phải trong lúc tập luyện.
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
                                 <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                     <span>
-                                        <span class="cl4">By</span> Admin
-                                        <span class="cl12 m-l-4 m-r-6">|</span>
-                                    </span>
-
-                                    <span>
-                                        StreetStyle, Fashion, Couple
+                                        <span class="cl4">Người đăng:</span> Admin
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 
@@ -84,7 +79,7 @@
                                 </span>
 
                                 <a href="{{ URL::to(route('search_blog_detail')) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                    Continue Reading
+                                    Tiếp tục đọc
                                     <i class="fa fa-long-arrow-right m-l-9"></i>
                                 </a>
                             </div>
@@ -93,51 +88,45 @@
 
                     <!-- item blog -->
                     <div class="p-b-63">
-                        <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                            <img src="images/blog-05.jpg" alt="IMG-BLOG">
+                        <a href="{{ URL::to(route('search_blog_detail')) }}" class="hov-img0 how-pos5-parent">
+                            <img src="{{ asset('images/blog-05.jpg')}}" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                 <span class="ltext-107 cl2 txt-center">
-                                    18
+                                    22
                                 </span>
 
                                 <span class="stext-109 cl3 txt-center">
-                                    Jan 2018
+                                    June 2022
                                 </span>
                             </div>
                         </a>
 
                         <div class="p-t-32">
                             <h4 class="p-b-15">
-                                <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                    The Great Big List of Men’s Gifts for the Holidays
+                                <a href="{{ URL::to(route('search_blog_detail')) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                    13 Điều Cần Lưu Ý Để Đạp Xe Đúng Cách
                                 </a>
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                            Đạp xe là một trong những hoạt động giúp bạn cải thiện sức khỏe nhưng để đạp xe đúng cách và đạt hiệu quả cao thì bạn cần lưu ý một số quy tắc dưới đây nhé.
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
                                 <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                     <span>
-                                        <span class="cl4">By</span> Admin
+                                        <span class="cl4">Người đăng:</span> Admin
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 
                                     <span>
-                                        StreetStyle, Fashion, Couple
-                                        <span class="cl12 m-l-4 m-r-6">|</span>
-                                    </span>
-
-                                    <span>
-                                        8 Comments
+                                        8 Bình luận
                                     </span>
                                 </span>
 
-                                <a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                    Continue Reading
-
+                                <a href="{{ URL::to(route('search_blog_detail')) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                    Tiếp tục đọc
                                     <i class="fa fa-long-arrow-right m-l-9"></i>
                                 </a>
                             </div>
@@ -146,51 +135,45 @@
 
                     <!-- item blog -->
                     <div class="p-b-63">
-                        <a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-                            <img src="images/blog-06.jpg" alt="IMG-BLOG">
+                        <a href="{{ URL::to(route('search_blog_detail')) }}" class="hov-img0 how-pos5-parent">
+                            <img src="{{ asset('images/blog-06.jpg')}}" alt="IMG-BLOG">
 
                             <div class="flex-col-c-m size-123 bg9 how-pos5">
                                 <span class="ltext-107 cl2 txt-center">
-                                    16
+                                    22
                                 </span>
 
                                 <span class="stext-109 cl3 txt-center">
-                                    Jan 2018
+                                    June 2022
                                 </span>
                             </div>
                         </a>
 
                         <div class="p-t-32">
                             <h4 class="p-b-15">
-                                <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                                    5 Winter-to-Spring Fashion Trends to Try Now
+                                <a href="{{ URL::to(route('search_blog_detail')) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                    Thực Đơn Ăn Uống Khoa Học Để Giảm Cân Hiệu Quả, An Toàn
                                 </a>
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
+                            Nhiều người lo sợ chế độ ăn kiêng giảm cân vì chúng quá khắc nghiệt, khiến họ cảm thấy luôn thèm ăn và muốn ăn hơn bao giờ hết. Nhưng đối với cách lên thực đơn này, bạn có thể thoải mái ăn cái mình muốn, miễn là trong khuôn khổ lượng calo cần cung cấp đủ cho cơ thể mà vẫn đảm bảo hiệu quả và an toàn. Cùng Xedap.vn lưu lại chế độ ăn uống và tập luyện để việc giảm cân không còn khó khăn nữa!
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
                                 <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                     <span>
-                                        <span class="cl4">By</span> Admin
+                                        <span class="cl4">Người đăng:</span> Admin
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 
                                     <span>
-                                        StreetStyle, Fashion, Couple
-                                        <span class="cl12 m-l-4 m-r-6">|</span>
-                                    </span>
-
-                                    <span>
-                                        8 Comments
+                                        8 Bình luận
                                     </span>
                                 </span>
 
-                                <a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                    Continue Reading
-
+                                <a href="{{ URL::to(route('search_blog_detail')) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                    Tiếp tục đọc
                                     <i class="fa fa-long-arrow-right m-l-9"></i>
                                 </a>
                             </div>
@@ -228,7 +211,7 @@
                         <ul>
                             @foreach ($categories as $key => $category)
                             @if ($key < 5) <li class="bor18">
-                                <a class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4" href="{{ URL::to(route('search_products')) }}?category={{ $category->name }}">{{ $category->name }}</a>
+                                <a class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4" href="{{ URL::to(route('search_products')) }}?category={{ $category->id }}">{{ $category->name }}</a>
                                 </li>
                                 @endif
                                 @endforeach
@@ -260,110 +243,6 @@
                             @endforeach
 
 
-                        </ul>
-                    </div>
-
-                    <div class="p-t-55">
-                        <h4 class="mtext-112 cl2 p-b-20">
-                            Archive
-                        </h4>
-
-                        <ul>
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        July 2018
-                                    </span>
-
-                                    <span>
-                                        (9)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        June 2018
-                                    </span>
-
-                                    <span>
-                                        (39)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        May 2018
-                                    </span>
-
-                                    <span>
-                                        (29)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        April 2018
-                                    </span>
-
-                                    <span>
-                                        (35)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        March 2018
-                                    </span>
-
-                                    <span>
-                                        (22)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        February 2018
-                                    </span>
-
-                                    <span>
-                                        (32)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        January 2018
-                                    </span>
-
-                                    <span>
-                                        (21)
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="p-b-7">
-                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-                                    <span>
-                                        December 2017
-                                    </span>
-
-                                    <span>
-                                        (26)
-                                    </span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>

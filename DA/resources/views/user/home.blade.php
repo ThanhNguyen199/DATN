@@ -56,7 +56,7 @@
                     <img class="card-img rounded-0 img-fluid" src="{{ asset('' . Config::get('app.image.default')) }}" alt="IMG-BANNER" />
                     @endif
 
-                    <a href="{{ URL::to(route('search_products')) }}?category={{$cate->name}}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="{{ URL::to(route('search_products')) }}?category={{$cate->id}}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
                             <span class="block1-name ltext-102 trans-04 p-b-8">
                             </span>
@@ -91,6 +91,7 @@
         <div class="row isotope-grid">
             @foreach ($catego->product->take(3) as $key => $pro)
             <!-- Block2 -->
+            @if ($pro->is_deleted == 0 && $pro->active == 1)
             <div class="col-sm-6 col-md-4  p-b-35 isotope-item">
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -125,9 +126,9 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
-
         @endforeach
     </div>
 </section>

@@ -180,7 +180,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-sliders-h"></i>
                                 <p>
-                                    Sidebar
+                                    Slidebar
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -188,13 +188,13 @@
                                 <li class="nav-item">
                                     <a href="{{ URL::to(route('admin.sidebar.index')) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách sidebar</p>
+                                        <p>Danh sách slidebar</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ URL::to(route('admin.sidebar.create')) }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Side bar</p>
+                                        <p>Thêm Slide bar</p>
                                     </a>
                                 </li>
                             </ul>
