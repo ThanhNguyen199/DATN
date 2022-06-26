@@ -1,4 +1,4 @@
-# ĐỒ ÁN TỐT NGHIỆP NĂM HỌC 2020-2021
+# ĐỒ ÁN TỐT NGHIỆP NĂM HỌC 2021-2022
 + Họ tên: Nguyễn Trọng Minh Thanh
 + Mã sinh viên: 5851071059
 + Lớp: Công nghệ thông tin K58
