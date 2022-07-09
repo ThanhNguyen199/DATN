@@ -21,4 +21,3 @@
 	+ Thống kê về sản phẩm, hóa đơn, khách hàng.
 - Các API hỗ trợ
 	+ API hỗ trợ thanh toán: PayPal.
-- Website: https://czstore199.000webhostapp.com/
