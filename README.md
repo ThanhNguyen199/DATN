@@ -2,7 +2,7 @@
 + Họ tên: Nguyễn Trọng Minh Thanh
 + Mã sinh viên: 5851071059
 + Lớp: Công nghệ thông tin K58
-# Đề tài: TÌM HIỂU THUẬT TOÁN APRIORI VÀ XÂY DỰNG WEBSITE THƯƠNG MẠI
+# Đề tài: XÂY DỰNG WEBSITE THƯƠNG MẠI ĐIỆN TỬ
 # Phần 1: Công nghệ sử dụng
 - Sử dụng ngôn ngữ PHP (Laravel) phía backend.
 - Sử dụng html, css, bootstrap, javascript phía frontend.
